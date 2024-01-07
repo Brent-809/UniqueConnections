@@ -1,0 +1,119 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/messages" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Voeg vrienden toe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-searchbar
+    placeholder="Zoek gebruikers"
+    inputmode="decimal"
+    type="decimal"
+    (ionChange)="onSearchChange($event)"
+    [debounce]="250"
+  ></ion-searchbar>
+  <div
+    *ngFor="let user of pendingFriendRequests | keyvalue"
+    id="toast-default"
+    class="flex my-4 border border-t-gray-200 border-b-gray-200 items-center w-full p-4 text-gray-500 bg-white rounded-lg dark:text-gray-400 dark:bg-gray-800"
+    role="alert"
+  >
+    <div
+      class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500"
+    >
+      <img class="sm:m-4 bg-transparent" src="{{user.value.profileImg}}" />
+    </div>
+    <div class="ml-3 text-sm font-normal">
+      <strong>{{ user.value.username }}</strong> wil vrienden worden
+    </div>
+    <button
+      (click)="declineFriendRequest(user.value._id)"
+      type="button"
+      class="ml-auto mx-2 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+      data-dismiss-target="#toast-default"
+      aria-label="Close"
+    >
+      <span class="sr-only">Close</span>
+      <svg
+        class="w-3 h-3"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 14 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+        />
+      </svg>
+    </button>
+    <button
+      (click)="acceptFriendRequest(user.value._id)"
+      type="button"
+      class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+      data-dismiss-target="#toast-default"
+      aria-label="Close"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M4.5 12.75l6 6 9-13.5"
+        />
+      </svg>
+    </button>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        size="4"
+        sizeMd="3"
+        sizeLg="2"
+        sizeXl="2"
+        *ngFor="let item of filteredUsers"
+      >
+        <app-contact-card
+          (click)="AddFriend(item.name, item._id)"
+          [image]="item.profileImg"
+          [name]="item.name"
+        ></app-contact-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <hr />
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        size="4"
+        sizeMd="3"
+        sizeLg="2"
+        sizeXl="2"
+        *ngFor="let item of users"
+      >
+        <ng-container *ngIf="!friendRequestsIds.includes(item._id)">
+          <ng-container *ngIf="!friendIds.includes(item._id)">
+            <app-contact-card
+              (click)="AddFriend(item.name, item._id)"
+              [image]="item.profileImg"
+              [name]="item.name"
+              [isActive]="item.active"
+            ></app-contact-card>
+          </ng-container>
+        </ng-container>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

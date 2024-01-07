@@ -1,0 +1,37 @@
+<ion-content [fullscreen]="true">
+  <ion-grid
+    class="ion-no-padding ion-no-margin background-opts bg-gradient-to-r from-green-400 to-cyan-500"
+    
+  >
+    <ion-row>
+      <ion-col class="header-container">
+        <ion-header class="ion-no-border">
+          <ion-toolbar>
+            <ion-buttons slot="end">
+              <ion-button (click)="goToSettings()">
+                <ion-icon
+                  class="white-icon"
+                  slot="icon-only"
+                  name="options"
+                ></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <div class="profile ion-padding">
+          <div class="profile-user">
+            <ion-thumbnail>
+              <img
+                src="{{profileImg}}"
+              />
+            </ion-thumbnail>
+            <ul class="profile-text ion-padding-horizontal">
+              <li>{{name}}</li>
+              <li>{{bio}}</li>
+            </ul>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

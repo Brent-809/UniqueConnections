@@ -1,0 +1,141 @@
+<ion-content>
+  <div
+    class="loading h-1 w-[25%] bg-green-500 transition-all duration-200 absolute z-40 top-0"
+  ></div>
+  <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+      <h2
+        class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+      >
+        Persoonsgegevens
+      </h2>
+    </div>
+
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <form
+        class="space-y-6"
+        (ngSubmit)="goToNextStep()"
+        [formGroup]="registrationForm"
+      >
+        <div>
+          <label
+            for="name"
+            class="block text-sm font-medium leading-6 text-gray-900"
+            >Voor + Achternaam</label
+          >
+          <div class="mt-2">
+            <input
+              id="name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+              formControlName="name"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6"
+            />
+          </div>
+          <div
+            *ngIf="registrationForm.get('name')?.invalid && registrationForm.get('name')?.touched"
+          >
+            <div
+              class="text-red-500"
+              *ngIf="registrationForm.get('name')?.errors?.['required']"
+            >
+              Legale naam is vereist.
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between">
+            <label
+              for="chosen"
+              class="block text-sm font-medium leading-6 text-gray-900"
+              >voorkeursnaam</label
+            >
+          </div>
+          <div class="mt-2">
+            <input
+              id="chosen"
+              name="chosen"
+              type="text"
+              autocomplete="chosen"
+              placeholder="(De naam die je het liefst kiest.)"
+              required
+              formControlName="chosen"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6"
+            />
+          </div>
+          <div
+            *ngIf="registrationForm.get('chosen')?.invalid && registrationForm.get('chosen')?.touched"
+          >
+            <div
+              class="text-red-500"
+              *ngIf="registrationForm.get('chosen')?.errors?.['required']"
+            >
+              Voorkeursnaam is vereist.
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between">
+            <label
+              for="username"
+              class="block text-sm font-medium leading-6 text-gray-900"
+              >Gebruikersnaam</label
+            >
+          </div>
+          <div class="mt-2 flex">
+            <input
+              id="username"
+              name="username"
+              type="text"
+              autocomplete="username"
+              placeholder="(Je online naam)"
+              required
+              formControlName="username"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6"
+            />
+            
+          </div>
+          <div
+            *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched"
+          >
+            <div
+              class="text-red-500"
+              *ngIf="registrationForm.get('username')?.errors?.['required']"
+            >
+              Gebruikersnaam is vereist.
+            </div>
+            <div
+              class="text-red-500"
+              *ngIf="registrationForm.get('username')?.errors?.['usernameTaken']"
+            >
+              Gebruikersnaam is niet beschikbaar.
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            [disabled]="!registrationForm.valid"
+            class="flex w-full justify-center rounded-md bg-gradient-to-r from-green-400 to-cyan-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+          >
+            Ga verder
+          </button>
+        </div>
+      </form>
+
+      <p class="mt-10 text-center text-sm text-gray-500">
+        Wil je inloggen?
+        <a
+          routerLink="/welcome"
+          class="font-semibold leading-6 text-green-500 hover:text-green-700"
+          >Ga terug</a
+        >
+      </p>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-grid class="ion-padding-horizontal background-opts" [ngStyle]="background">
+      <ion-row class="ion-padding-vertical">
+        <ion-col>
+          <div style="text-align: center; margin-top: 70px;">
+            <ion-title color="light"
+              style="font-weight: 300; font-size: 44px; font-family: 'gilbert', sans-serif;">Welkom!</ion-title>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid class="ion-padding white">
+      <ion-row class="ion-padding-horizontal">
+        <ion-col style="text-align: center;">
+          <ion-text color="dark" style="font-size: 26px;">Kies een optie om door te gaan</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-padding-horizontal">
+        <ion-col class="ion-text-center">
+          <ion-button class="action-button gradient-button ion-margin-top"  expand="block" fill="solid"
+            (click)="goToLogin()">
+            <ion-icon name="mail" class="ion-padding-end"></ion-icon>
+            <span>Ga verder met E-mail</span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-padding-horizontal">
+        <ion-col class="text-center">
+          <ion-text color="medium">OF</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-padding-horizontal">
+        <ion-col class="ion-padding-bottom">
+          <ion-button class="action-button ion-margin-top" expand="block" fill="outline" color="medium"
+            (click)="goToRegister()">
+            <ion-icon name="person-add" class="ion-padding-end"></ion-icon>
+            <span>Maak een account</span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,79 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Privacy Voorkeuren</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div
+    class="loading h-1 w-[100%] bg-green-500 transition-all duration-200 absolute z-40 top-0"
+  ></div>
+  <div class="md:w-1/2 lg:w-1/3 py-4 px-4">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+      <h2
+        class="mt-10 mb-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+      >
+        Gebruikersavatar
+      </h2>
+    </div>
+    <div class=" ">
+      <a>
+        <div
+          class="bg-white relative shadow p-2 rounded-lg text-gray-800 hover:shadow-lg"
+        >
+          <div class="flex justify-center">
+            <img
+              src="{{profileImages}}"
+              class="rounded-full -mt-6 border-4 object-center object-cover border-white mr-2 h-32 w-32"
+            />
+          </div>
+          <div class="py-2 px-2">
+            <ion-button
+              expand="block"
+              fill="outline"
+              (click)="fetchProfileImages()"
+            >
+              Genereer
+            </ion-button>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Privacy Settings -->
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <h2
+      class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+    >
+      Privacy Voorkeuren
+    </h2>
+  </div>
+  <ion-list lines="none" class="privacy-list">
+    <ion-item
+      class="privacy-item"
+      *ngFor="let privacyVariable of privacyVariables"
+    >
+      <ion-label class="privacy-label">{{ privacyVariable.label }}</ion-label>
+      <ion-toggle
+        slot="end"
+        [(ngModel)]="privacyVariable.visible"
+        (ionChange)="updateValue(privacyVariable)"
+        class="privacy-toggle"
+      ></ion-toggle>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" (click)="finish()">
+      <span style="color: #f9f9f9">Ga verder</span>
+      <ion-icon
+        style="color: #f9f9f9"
+        slot="end"
+        name="arrow-forward"
+      ></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

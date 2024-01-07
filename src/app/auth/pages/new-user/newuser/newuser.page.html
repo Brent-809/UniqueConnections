@@ -1,0 +1,51 @@
+<ion-content>
+  <div
+    class="loading h-1 w-[25%] bg-green-500 transition-all duration-200 absolute z-40 top-0"
+  ></div>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col
+        size="6"
+        *ngFor="let gender of genders"
+        (click)="onCardClick(gender)"
+      >
+        <ion-card
+          class="card-checkbox"
+          [class.selected]="selectedGender === gender"
+        >
+          <ion-card-header style="text-align: center">
+            <ion-card-title style="font-size: 22.5px"
+              >{{gender.name}}</ion-card-title
+            >
+            <div *ngIf="selectedGender === gender && gender.name === 'Other'">
+              <h3>{{otherValue}}</h3>
+            </div>
+          </ion-card-header>
+          <img style="width: 125px" [src]="gender.imageUrl" />
+          <!-- Add the other input field inside the "Other" card -->
+          <input
+            *ngIf="selectedGender === gender && gender.name === 'Other'"
+            [(ngModel)]="otherValue"
+            type="text"
+            class="block mt-2 m-3 w-10/12 placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-green-400 focus:outline-none focus:ring focus:ring-green-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-green-300"
+          />
+
+          <!-- Display the value of otherValue when the selected gender is "Other" -->
+        </ion-card>
+      </ion-col>
+      <ion-col size="6"></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-button
+      expand="block"
+      [disabled]="!selectedGender"
+      (click)="updateGender()"
+    >
+      <span style="color: #f9f9f9">Opslaan</span>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

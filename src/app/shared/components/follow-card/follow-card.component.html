@@ -1,0 +1,14 @@
+<ion-card button>
+  <ion-card-content class="ion-no-padding">
+    <div class="data-container">
+      <ion-avatar>
+        <img [src]="image" />
+      </ion-avatar>
+      <ion-card-title> {{ name }}</ion-card-title>
+      <ion-card-subtitle>{{ bio }}</ion-card-subtitle>
+      <ion-button class="follow-btn"
+        ><ion-icon slot="start" name="add"></ion-icon> Add friend</ion-button
+      >
+    </div>
+  </ion-card-content>
+</ion-card>

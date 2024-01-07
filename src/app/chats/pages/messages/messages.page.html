@@ -1,0 +1,73 @@
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-title>Berichten</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/addfriend">
+        <span>Vrienden</span>
+        <ion-badge class="mx-2" color="danger" slot="end"
+          >{{pendingUsersCount}}</ion-badge
+        >
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="grid-cols-1 grid">
+    <h2 class="text-center w-full text-lg font-medium text-gray-800">
+      Toegetreden Groepen
+    </h2>
+    <div
+      class="grid grid-cols-2 p-3 gap-2 max-h-72 border-b border-solid overflow-auto"
+    >
+      <div
+        *ngFor="let joinedGroup of joinedGroups"
+        (click)="goToGroup(joinedGroup._id)"
+        class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow ion-activatable ripple-parent"
+      >
+        <ion-ripple-effect></ion-ripple-effect>
+        <div>
+          <div class="avatar m-4">
+            <p>2</p>
+          </div>
+          <img
+            class="rounded-t-lg h-36 w-full object-cover"
+            src="{{joinedGroup.image}}"
+            alt=""
+          />
+          <div class="text-center">
+            <h5
+              class="mb-2 text-lg mt-2 font-bold tracking-tight text-gray-900"
+            >
+              {{joinedGroup.name}}
+            </h5>
+            <hr />
+            <p class="mb-3 text-sm font-normal text-gray-700">
+              <strong>Categorie: </strong>{{joinedGroup.category}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-cols-2"></div>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        size="4"
+        sizeMd="3"
+        sizeLg="2"
+        sizeXl="2"
+        *ngFor="let item of users"
+      >
+        <app-contact-card
+          [routerLink]="'/userchat/' + item._id"
+          routerLinkActive="router-link-active"
+          [image]="item.profileImg"
+          [name]="item.name"
+          [isActive]="item.active"
+        ></app-contact-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

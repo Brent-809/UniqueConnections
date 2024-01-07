@@ -1,0 +1,29 @@
+.avatar {
+  position: absolute;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  display: block;
+  height: 36px;
+  width: 36px;
+  max-width: 36px;
+  vertical-align: middle;
+  text-align: center;
+  justify-content: center;
+  background: var(--ion-color-danger);
+  p {
+    margin-top: 5px;
+    color: #ffffff;
+  }
+}
+
+h2 {
+  font-family: "Roboto", sans-serif;
+}
+
+
+.ripple-parent {
+    position: relative;
+    overflow: hidden;
+  
+    border: 1px solid #ddd;
+  }

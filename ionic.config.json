@@ -1,0 +1,8 @@
+{
+  "name": "UniqueConnections",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "innerHTMLTemplatesEnabled": true
+}

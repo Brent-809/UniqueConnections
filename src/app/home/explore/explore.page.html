@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-title>Explore</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="exit" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToNotifications()">
+        <ion-icon slot="icon-only" name="notifications" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding-horizontal">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-no-padding half-padding">
+        <ion-item lines="none" class="section">
+          <ion-text>
+            <h5 class="section-title">Aanbevolen groepen</h5>
+          </ion-text>
+          <a slot="end" [routerLink]="">Zie Alles</a>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <swiper-container [options]="storiesConfig" slides-per-view="3">
+          <swiper-slide class="groups" *ngFor="let item of groups">
+            <app-group-card
+              [image]="item.image"
+              [members]="item.totalMembers"
+              [name]="item.name"
+              (click)="joinGroup(item._id)"
+            >
+            </app-group-card>
+          </swiper-slide>
+        </swiper-container>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

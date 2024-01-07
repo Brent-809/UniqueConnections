@@ -1,0 +1,135 @@
+
+<ion-content>
+  <div
+    class="loading h-1 w-[75%] bg-green-500 transition-all duration-200 absolute z-40 top-0"
+  ></div>
+  <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+      <h2
+        class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+      >
+        stoornis en seksualiteit
+      </h2>
+    </div>
+
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <form
+        class="space-y-6"
+        (ngSubmit)="SaveSeksualiteitAndDisorder()"
+        [formGroup]="newUserForm"
+      >
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle
+              >Voer hier jouw eigen disorder in.</ion-card-subtitle
+            >
+            <ion-card-title>disorder</ion-card-title>
+            <ion-item>
+              <ion-label position="stacked">Stoornis</ion-label>
+              <ion-select
+                value=""
+                interface=""
+                placeholder="Selecteer stoornis "
+                [disabled]="disorderDisable"
+                [multiple]="true"
+                formControlName="developmentalDisorder"
+              >
+                <ion-select-option value="ass">ASS</ion-select-option>
+                <ion-select-option value="adhd">ADHD</ion-select-option>
+                <ion-select-option value="obsessief">Obsessief-compulsieve stoornis</ion-select-option>
+                <ion-select-option value="social">Sociale angststoornis</ion-select-option>
+                <ion-select-option value="personality">Persoonlijkheidsstoornis</ion-select-option>
+                <ion-select-option value="depressie">Depressie</ion-select-option>
+                <ion-select-option value="odd">ODD</ion-select-option>
+                <ion-select-option value="eetstoornis">Eetstoornis</ion-select-option>
+                <ion-select-option value="pyschotische">Psychotische stoornis</ion-select-option>
+                <ion-select-option value="none"
+                  >Geen van toepassing</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </ion-card-header>
+        </ion-card>
+        <hr />
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Seksualiteit</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-radio-group
+              formControlName="selectedSexuality"
+              [attr.disabled]="sexualityDisable"
+            >
+              <ion-item>
+                <ion-label>Straight</ion-label>
+                <ion-radio value="straight"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Lesbian</ion-label>
+                <ion-radio value="lesbian"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Gay</ion-label>
+                <ion-radio value="gay"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Bisexual</ion-label>
+                <ion-radio value="bisexual"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Pansexual</ion-label>
+                <ion-radio value="pansexual"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Omnisexual</ion-label>
+                <ion-radio value="omnisexual"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Demiromantic</ion-label>
+                <ion-radio value="demiromantic"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Aromantic</ion-label>
+                <ion-radio value="aromantic"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Transgender</ion-label>
+                <ion-radio value="transgender"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Queer</ion-label>
+                <ion-radio value="queer"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Questioning</ion-label>
+                <ion-radio value="questioning"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Asexual</ion-label>
+                <ion-radio value="asexual"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Other</ion-label>
+                <ion-radio value="other"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Zeg ik liever niet</ion-label>
+                <ion-radio value="notsay"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-card-content>
+        </ion-card>
+
+        <div>
+          <button
+            type="submit"
+            [disabled]="!newUserForm.valid"
+            class="flex w-full justify-center rounded-md bg-gradient-to-r from-green-400 to-cyan-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+          >
+            Ga verder
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

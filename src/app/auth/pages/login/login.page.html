@@ -1,0 +1,106 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-grid class="ion-padding-horizontal background-opts">
+      <ion-row class="ion-no-padding">
+        <ion-col class="ion-no-padding">
+          <ion-header class="ion-no-border">
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="goBack()" class="back-btn">
+                  <ion-icon
+                    slot="icon-only"
+                    name="arrow-back-outline"
+                  ></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <div style="text-align: center; margin-top: 30px">
+            <ion-title
+              color="light"
+              style="
+                font-weight: 300;
+                font-size: 24px;
+                font-family: 'gilbert', sans-serif;
+              "
+              >Chatten zonder grenzen<br />Praat met iedereen over<br />
+              alles!</ion-title
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid class="ion-padding white">
+      <ion-row class="ion-padding-horizontal">
+        <ion-col size="9" class="ion-padding-vertical">
+          <h1 class="title ion-no-padding ion-no-margin">Login</h1>
+          <ion-text color="dark">Voer hier jouw gegevens in.</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-padding-horizontal">
+        <ion-col class="">
+          <form (ngSubmit)="loginUser()" [formGroup]="loginForm">
+            <div>
+              <div class="flex items-center justify-between">
+                <label
+                  for="email"
+                  class="block text-sm font-medium leading-6 text-gray-900"
+                  >E-mail</label
+                >
+              </div>
+              <div class="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="E-mail…"
+                  autocomplete="email"
+                  required
+                  formControlName="email"
+                  class="block w-full rounded-md border-0 py-1.5 mb-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between">
+                <label
+                  for="password"
+                  class="block text-sm font-medium leading-6 text-gray-900"
+                  >Wachtwoord</label
+                >
+              </div>
+              <div class="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="password"
+                  required
+                  formControlName="password"
+                  placeholder="··········"
+                  class="block w-full rounded-md border-0 py-1.5 mb-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div class="ion-padding-vertical">
+              <button
+              [disabled]="!loginForm.valid"
+                type="submit"
+                class="flex w-full justify-center rounded-md bg-gradient-to-r from-green-400 to-cyan-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+              >
+                Ga verder
+              </button>
+            </div>
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <app-confetti [fire]="fireConfetti"></app-confetti>
+</ion-content>

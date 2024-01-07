@@ -1,0 +1,13 @@
+ion-list {
+  margin-top: 20px;
+
+  ion-item {
+    --ion-text-color: var(--ion-color-dark);
+  }
+
+  ion-toggle {
+    --background-checked: var(--ion-color-primary);
+    --background-unchecked: var(--ion-color-medium);
+    --handle-background-checked: var(--ion-color-primary);
+  }
+}
