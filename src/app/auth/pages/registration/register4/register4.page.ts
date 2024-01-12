@@ -8,8 +8,8 @@ import lottie from "lottie-web";
   styleUrls: ["./register4.page.scss"],
 })
 export class Register4Page implements OnInit {
-  private animationDuration: number = 4000; // Animation duration in milliseconds
-  private animation: any; // Declare animation variable
+  private animationDuration: number = 4000;
+  private animation: any;
 
   constructor(private elementRef: ElementRef) {}
 
@@ -28,7 +28,6 @@ export class Register4Page implements OnInit {
 
   private playAnimationWithDuration() {
     this.animation.play();
-    setTimeout(() => {
-    }, this.animationDuration);
+    setTimeout(() => {}, this.animationDuration);
   }
 }

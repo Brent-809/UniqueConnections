@@ -5,7 +5,6 @@ import { environment } from "../environments/environment";
 import OneSignal from "onesignal-cordova-plugin";
 import { Platform } from "@ionic/angular";
 import { ChatService } from "./chats/chat.service";
-import { map } from "rxjs";
 
 @Component({
   selector: "app-root",
@@ -28,7 +27,6 @@ export class AppComponent implements OnInit {
       if (this.platform.is("mobile")) {
         if (this.platform.is("android")) {
           if (this.platform.is("mobileweb")) {
-            console.log("Is mobileweb");
           } else {
             OneSignal.initialize(environment.onesignal);
             OneSignal.Notifications.requestPermission(true).then(
@@ -37,11 +35,7 @@ export class AppComponent implements OnInit {
               }
             );
           }
-        } else {
-          console.log("Not android!");
         }
-      } else {
-        console.log("Not mobile!");
       }
     });
   }
@@ -64,11 +58,11 @@ export class AppComponent implements OnInit {
   makeRequest() {
     const apiUrl = environment.apiUrl;
     this.http.get(apiUrl).subscribe(
-      () => {},
-      (error) => {
-        console.error(error);
-        this.router.navigateByUrl("/error");
-      }
+      () => {}
+      // (error) => {
+      //   console.error(error);
+      //   this.router.navigateByUrl("/error");
+      // }
     );
   }
 }

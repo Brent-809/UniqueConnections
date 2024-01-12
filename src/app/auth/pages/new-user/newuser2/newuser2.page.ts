@@ -26,8 +26,7 @@ export class Newuser2Page implements OnInit {
   ngOnInit() {
     this.newUserForm = this.formBuilder.group({
       developmentalDisorder: ["", Validators.required],
-      selectedSexuality: ["", Validators.required],
-    });
+   });
   }
 
   savedisorder() {
@@ -64,14 +63,7 @@ export class Newuser2Page implements OnInit {
   SaveSeksualiteitAndDisorder() {
     const userId = this.apiService.getUserIdFromToken();
     const developmentalDisorder = this.developmentalDisorder;
-    const selectedSexuality = this.selectedSexuality;
     if (userId) {
-      this.apiService
-        .updateUserSexuality(userId, this.newUserForm.value.selectedSexuality)
-        .subscribe((response: any) => {
-          if (response.id && response.sexuality === selectedSexuality) {
-          }
-        });
       this.apiService
         .updateUserDisorder(
           userId,

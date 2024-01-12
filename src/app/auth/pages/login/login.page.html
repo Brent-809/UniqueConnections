@@ -65,6 +65,12 @@
                   formControlName="email"
                   class="block w-full rounded-md border-0 py-1.5 mb-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6"
                 />
+                <div
+                  class="text-red-500"
+                  *ngIf="loginForm.dirty && loginForm.get('email')?.errors?.['invalidEmail']"
+                >
+                  Legale naam is vereist.
+                </div>
               </div>
             </div>
             <div>
@@ -84,13 +90,19 @@
                   required
                   formControlName="password"
                   placeholder="··········"
-                  class="block w-full rounded-md border-0 py-1.5 mb-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6"
+                  class="block w-full rounded-md border-0 py-1.5 mb-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6"
                 />
+                <div
+                  class="text-red-500"
+                  *ngIf="loginForm.dirty && loginForm.get('password')?.errors?.['invalidPassword']"
+                >
+                  {{loginForm.get('password')?.errors?.['message']}}
+                </div>
               </div>
             </div>
             <div class="ion-padding-vertical">
               <button
-              [disabled]="!loginForm.valid"
+                [disabled]="!loginForm.valid"
                 type="submit"
                 class="flex w-full justify-center rounded-md bg-gradient-to-r from-green-400 to-cyan-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
               >

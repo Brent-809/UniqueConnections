@@ -37,12 +37,7 @@
           <div
             *ngIf="registrationForm.get('name')?.invalid && registrationForm.get('name')?.touched"
           >
-            <div
-              class="text-red-500"
-              *ngIf="registrationForm.get('name')?.errors?.['required']"
-            >
-              Legale naam is vereist.
-            </div>
+            
           </div>
         </div>
 

@@ -174,6 +174,14 @@ const routes: Routes = [
     path: 'chat',
     loadChildren: () => import('./chats/pages/friends/chat/chat.module').then( m => m.ChatPageModule)
   },
+  {
+    path: 'events',
+    loadChildren: () => import('./home/events/events.module').then( m => m.EventsPageModule)
+  },
+  {
+    path: 'activity',
+    loadChildren: () => import('./home/activity/activity.module').then( m => m.ActivityPageModule)
+  },
 ];
 @NgModule({
   imports: [

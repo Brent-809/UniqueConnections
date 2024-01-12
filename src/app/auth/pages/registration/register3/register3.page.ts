@@ -1,31 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import {
   AlertController,
   ModalController,
   NavController,
-} from '@ionic/angular';
+} from "@ionic/angular";
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
-} from '@angular/forms';
-import { RegistrationService } from '../../../../auth/registration.service';
-import { LoadingPage } from 'src/app/shared/overlays/loading/loading.page';
-import { passwordValidator } from 'src/app/shared/validators/password.validator';
-import { Router } from '@angular/router';
-import { AuthApiService } from 'src/app/auth/auth-api.service';
+} from "@angular/forms";
+import { RegistrationService } from "../../../../auth/registration.service";
+import { LoadingPage } from "src/app/shared/overlays/loading/loading.page";
+import { passwordValidator } from "src/app/shared/validators/password.validator";
+import { Router } from "@angular/router";
+import { AuthApiService } from "src/app/auth/auth-api.service";
 
 @Component({
-  selector: 'app-register3',
-  templateUrl: './register3.page.html',
-  styleUrls: ['./register3.page.scss'],
+  selector: "app-register3",
+  templateUrl: "./register3.page.html",
+  styleUrls: ["./register3.page.scss"],
 })
-export class Register3Page {
+export class Register3Page implements OnInit {
   formData: any = {};
   registrationForm: FormGroup;
-  pwdIcon = 'eye-outline';
-  pwdIcon2 = 'eye-outline';
+  pwdIcon = "eye-outline";
+  pwdIcon2 = "eye-outline";
   showPwd = false;
   showPwd2 = false;
 
@@ -40,8 +40,8 @@ export class Register3Page {
   ) {
     this.registrationForm = this.formBuilder.group(
       {
-        password: [null, [Validators.required, passwordValidator]],
-        cpassword: [null, [Validators.required, passwordValidator]],
+        password: [null, [passwordValidator]],
+        cpassword: [null, [passwordValidator, this.passwordMatchValidator]],
       },
       {
         validator: this.passwordMatchValidator,
@@ -49,11 +49,19 @@ export class Register3Page {
     );
   }
 
+  ngOnInit(): void {
+    if (this.registrationService.registrationData) {
+      this.registrationForm
+        .get("email")
+        ?.setValue(this.registrationService.registrationData.email);
+    }
+  }
+
   passwordMatchValidator(
     control: AbstractControl
   ): { [key: string]: boolean } | null {
-    const password = control.get('password');
-    const cpassword = control.get('cpassword');
+    const password = control.get("password");
+    const cpassword = control.get("cpassword");
 
     if (password && cpassword && password.value !== cpassword.value) {
       return { passwordMismatch: true };
@@ -70,9 +78,9 @@ export class Register3Page {
 
     if (user.password !== user.cpassword) {
       const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Wachtwoord en bevestig wachtwoord komen niet overeen.',
-        buttons: ['OK'],
+        header: "Error",
+        message: "Wachtwoord en bevestig wachtwoord komen niet overeen.",
+        buttons: ["OK"],
       });
       await alert.present();
       return;
@@ -90,14 +98,13 @@ export class Register3Page {
       };
 
       // Set the page number in the service
-      this.registrationService.pageNumber = 3;
 
       try {
         await this.apiService
           .createUser(this.registrationService.registrationData)
           .toPromise();
         this.apiService.logout();
-        this.router.navigateByUrl('/register4');
+        this.router.navigateByUrl("/register4");
         await loading.dismiss();
       } catch (error: any) {
         // Rest of the code remains unchanged
@@ -108,6 +115,6 @@ export class Register3Page {
   }
 
   goBack() {
-    this.navCtrl.navigateBack('/');
+    this.navCtrl.navigateBack("/register2");
   }
 }

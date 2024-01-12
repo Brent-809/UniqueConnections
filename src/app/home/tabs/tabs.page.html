@@ -7,11 +7,11 @@
         data-tooltip-target="tooltip-home"
         type="button"
         routerLinkActive="bg-gray-50"
-        routerLink="explore"
+        routerLink="events"
         class="inline-flex flex-col items-center justify-center px-5 rounded-s-full hover:bg-gray-50 dark:hover:bg-gray-800 group"
       >
         <ion-icon
-          name="compass-outline"
+          name="calendar-outline"
           routerLinkActive="text-green-500"
           class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-green-500 dark:group-hover:text-green-400"
         ></ion-icon>
@@ -29,40 +29,29 @@
           class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-green-500 dark:group-hover:text-green-400"
         ></ion-icon>
       </button>
-      <div class="flex items-center justify-center">
-        <button
-          data-tooltip-target="tooltip-new"
-          type="button"
-          routerLink="/create-group"
-          class="inline-flex items-center justify-center w-10 h-10 font-medium bg-green-500 rounded-full hover:bg-green-700 group focus:ring-4 focus:ring-green-300 focus:outline-none dark:focus:ring-green-800"
-        >
-          <svg
-            class="w-4 h-4 text-white"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 18 18"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 1v16M1 9h16"
-            />
-          </svg>
-        </button>
-      </div>
       <button
-        data-tooltip-target="tooltip-settings"
+        data-tooltip-target="tooltip-wallet"
         type="button"
         routerLinkActive="bg-gray-50"
-        [routerLink]="'notif'"
+        routerLink="explore"
         class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
       >
         <ion-icon
           routerLinkActive="text-green-500"
-          name="notifications-outline"
+          name="compass-outline"
+          class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-green-500 dark:group-hover:text-green-400"
+        ></ion-icon>
+      </button>
+      <button
+        data-tooltip-target="tooltip-settings"
+        type="button"
+        routerLinkActive="bg-gray-50"
+        [routerLink]="'activity'"
+        class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+      >
+        <ion-icon
+          routerLinkActive="text-green-500"
+          name="flame-outline"
           class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-green-500 dark:group-hover:text-green-400"
         ></ion-icon>
       </button>

@@ -40,7 +40,7 @@ export class MessagesPage implements OnInit {
 
     this.currentUserId = this.apiService.getUserIdFromToken();
     this.socketService.onFriendRequestReceived((data) => {
-      // Handle friend request received event if needed
+      this.ngOnInit();
     });
 
     this.apiService.getUserById(this.currentUserId).subscribe((response) => {
@@ -110,6 +110,7 @@ export class MessagesPage implements OnInit {
 
     this.apiService.getUserById(userId).subscribe(
       (user) => {
+        this.currentUserId = user;
         const joinedGroups = user.joinedGroups;
 
         if (joinedGroups.includes(groupId)) {

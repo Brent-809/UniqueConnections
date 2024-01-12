@@ -25,27 +25,6 @@ export class WelcomePage implements OnInit {
   }
 
   goToRegister() {
-    // Access the page number directly from the service
-    const pageNumber = this.registerService.pageNumber;
-
-    // Navigate based on the page number
-    switch (pageNumber) {
-      case 0:
-        this.router.navigate(["/register"]);
-        break;
-      case 1:
-        this.router.navigate(["/register2"]);
-        break;
-      case 2:
-        this.router.navigate(["/register3"]);
-        break;
-      case 3:
-        this.router.navigate(["/register4"]);
-        break;
-      // Add more cases if needed
-
-      default:
-        this.router.navigate(["/register"]); // Default to the first page if no valid page number is found
-    }
+    this.router.navigate(["/register"]);
   }
 }

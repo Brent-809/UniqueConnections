@@ -45,7 +45,7 @@
             </div>
             <div
               class="text-red-500"
-              *ngIf="registrationForm.get('email')?.errors"
+              *ngIf="!registrationForm.get('email')?.errors?.['required'] && registrationForm.get('email')?.errors"
             >
               E-mail is niet geldig.
             </div>

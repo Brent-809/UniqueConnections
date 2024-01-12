@@ -8,7 +8,7 @@
       <h2
         class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
       >
-        stoornis en seksualiteit
+        Stoornissen
       </h2>
     </div>
 
@@ -20,17 +20,11 @@
       >
         <ion-card>
           <ion-card-header>
-            <ion-card-subtitle
-              >Voer hier jouw eigen disorder in.</ion-card-subtitle
-            >
-            <ion-card-title>disorder</ion-card-title>
             <ion-item>
-              <ion-label position="stacked">Stoornis</ion-label>
               <ion-select
                 value=""
                 interface=""
                 placeholder="Selecteer stoornis "
-                [disabled]="disorderDisable"
                 [multiple]="true"
                 formControlName="developmentalDisorder"
               >
@@ -43,7 +37,7 @@
                 <ion-select-option value="odd">ODD</ion-select-option>
                 <ion-select-option value="eetstoornis">Eetstoornis</ion-select-option>
                 <ion-select-option value="pyschotische">Psychotische stoornis</ion-select-option>
-                <ion-select-option value="none"
+                <ion-select-option value="geen"
                   >Geen van toepassing</ion-select-option
                 >
               </ion-select>
@@ -51,7 +45,7 @@
           </ion-card-header>
         </ion-card>
         <hr />
-        <ion-card>
+        <!-- <ion-card>
           <ion-card-header>
             <ion-card-title>Seksualiteit</ion-card-title>
           </ion-card-header>
@@ -118,7 +112,7 @@
               </ion-item>
             </ion-radio-group>
           </ion-card-content>
-        </ion-card>
+        </ion-card> -->
 
         <div>
           <button

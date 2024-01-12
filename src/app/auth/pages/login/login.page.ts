@@ -51,14 +51,15 @@ export class LoginPage implements OnInit {
       .then((a: any) => {
         a.present().then(() => {
           if (!this.loading) {
-            a.dismiss().then(() => console.log("abort presenting"));
+            a.dismiss();
           }
         });
       });
   }
+
   async hideLoading() {
     this.loading = false;
-    return await this.modalCtrl.dismiss().then(() => console.log("dismissed"));
+    return await this.modalCtrl.dismiss();
   }
 
   async loginUser() {
@@ -79,59 +80,33 @@ export class LoginPage implements OnInit {
           const userId = decodedToken.userId;
 
           if (userId) {
-            this.apiService.getVerifiedUserById(userId.toString()).subscribe(
-              async (verifiedStatus: any) => {
-                if (verifiedStatus.verified === true) {
+            this.startConfetti();
+            setTimeout(() => {
+              this.router.navigate(["/"]);
+            }, 1500);
+            this.apiService
+              .getUserById(userId.toString())
+              .subscribe(async (newUserStatus: any) => {
+                if (newUserStatus.isNewUser === true) {
                   this.startConfetti();
+                  setTimeout(() => {
+                    this.router.navigate(["/newuser"]);
+                  }, 1500);
+                  await loading.dismiss();
+                } else {
                   setTimeout(() => {
                     this.router.navigate(["/"]);
                   }, 1500);
-                  this.apiService
-                    .getUserById(userId.toString())
-                    .subscribe(async (newUserStatus: any) => {
-                      if (newUserStatus.isNewUser === true) {
-                        this.startConfetti();
-                        setTimeout(() => {
-                          this.router.navigate(["/newuser"]);
-                        }, 1500);
-                        await loading.dismiss();
-                      } else {
-                        setTimeout(() => {
-                          this.router.navigate(["/"]);
-                        }, 1500);
-                        await loading.dismiss();
-                      }
-                    });
-                } else {
-                  this.apiService.logout();
-
-                  this.presentVerifyMessage();
                   await loading.dismiss();
                 }
-              },
-              async (error) => {
-                await loading.dismiss();
-                this.apiService.logout();
-              }
-            );
-          } else {
-            await loading.dismiss();
-            this.apiService.logout();
+              });
           }
         } else {
-          if (response.message === "Invalid credentials") {
-            const invalidAlert = await this.alertController.create({
-              header: "Ongeautoriseerd",
-              message:
-                "Ongeldige inloggegevens. Controleer uw gebruikersnaam en wachtwoord.",
-              buttons: ["OK"],
-            });
-            await invalidAlert.present();
-          }
           await loading.dismiss();
           this.apiService.logout();
         }
       },
+
       async (error: HttpErrorResponse) => {
         this.hideLoading();
 

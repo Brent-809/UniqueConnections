@@ -38,8 +38,10 @@
             class="text-red-500"
             *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched"
           >
-            <div *ngIf="registrationForm.get('password')?.errors?.['required']">
-              Wachtwoord is vereist.
+            <div
+              *ngIf="registrationForm.get('password')?.errors?.['invalidPassword']"
+            >
+              {{ registrationForm.get('password')?.errors?.['message'] }}
             </div>
           </div>
         </div>
@@ -72,9 +74,9 @@
             </div>
             <div
               class="text-red-500"
-              *ngIf="registrationForm.get('cpassword')?.errors?.['passwordMismatch']"
+              *ngIf="registrationForm.errors?.['passwordMismatch']"
             >
-              Wachtwoorden komen niet overeen.
+              Wachtwoorden komen niet overeen. Voer dezelfde wachtwoorden in.
             </div>
           </div>
         </div>

@@ -30,6 +30,11 @@ export class Register2Page implements OnInit {
 
   ngOnInit() {
     this.getEmail();
+    if (this.registrationService.registrationData) {
+      this.registrationForm
+        .get("email")
+        ?.setValue(this.registrationService.registrationData.email);
+    }
   }
 
   getEmail() {
@@ -60,8 +65,6 @@ export class Register2Page implements OnInit {
         ...this.registrationService.registrationData,
         email: email,
       };
-
-      this.registrationService.pageNumber = 2;
 
       await loading.dismiss();
       this.navCtrl.navigateForward("/register3");

@@ -14,7 +14,7 @@ export class loading {
     return await this.loadingController.create({}).then((a) => {
       a.present().then(() => {
         if (!this.loading) {
-          a.dismiss().then(() => console.log("abort presenting"));
+          a.dismiss();
         }
       });
     });
@@ -22,8 +22,6 @@ export class loading {
 
   async hideLoading() {
     this.loading = false;
-    return await this.loadingController
-      .dismiss()
-      .then(() => console.log("dismissed"));
+    return await this.loadingController.dismiss();
   }
 }

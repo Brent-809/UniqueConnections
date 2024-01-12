@@ -75,8 +75,6 @@ export class Register1Page {
         ...this.registrationForm.value,
       };
 
-      this.registrationService.pageNumber = 1;
-
       await loading.dismiss();
       this.navCtrl.navigateForward("/register2");
     } else {

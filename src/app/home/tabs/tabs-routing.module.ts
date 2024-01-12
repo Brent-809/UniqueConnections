@@ -21,11 +21,14 @@ const routes: Routes = [
           ),
       },
       {
-        path: "notif",
+        path: "events",
         loadChildren: () =>
-          import("../../notifications/notif/notif.module").then(
-            (m) => m.NotifPageModule
-          ),
+          import("../events/events.module").then((m) => m.EventsPageModule),
+      },
+      {
+        path: "activity",
+        loadChildren: () =>
+          import("../activity/activity.module").then((m) => m.ActivityPageModule),
       },
       {
         path: "profile",
