@@ -28,6 +28,10 @@ export class RegistrationService {
     localStorage.setItem("registrationData", JSON.stringify(data));
   }
 
+  removeFromLocalstorage() {
+    localStorage.removeItem("registrationData");
+  }
+
   private loadFromLocalStorage(): void {
     const storedData = localStorage.getItem("registrationData");
     if (storedData) {

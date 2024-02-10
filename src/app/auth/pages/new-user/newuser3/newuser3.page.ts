@@ -15,8 +15,6 @@ export class Newuser3Page implements OnInit {
     { label: "Name", visible: true },
     { label: "Age", visible: true },
     { label: "Gender", visible: true },
-    { label: "Sexuality", visible: true },
-    { label: "Developmental Disorder", visible: true },
   ];
 
   constructor(private apiService: AuthApiService, private router: Router) {}

@@ -13,6 +13,7 @@ export interface User {
   chosen: string;
   isNewUser: string;
   profileImg: string;
+  userFriendIds: { _id: string };
   active: boolean;
 }
 
@@ -49,7 +50,11 @@ export class AddPage implements OnInit {
       this.friendRequestsIds = response.pendingFriendRequests;
       this.friendIds = response.userFriendIds;
     });
+    this.getUsers();
+    this.filteredUsers = this.users;
+  }
 
+  getUsers() {
     this.apiService.getAllUsers().subscribe((response) => {
       this.users = response
         .filter((user: User) => user.verified)
@@ -57,23 +62,26 @@ export class AddPage implements OnInit {
         .filter((user: User) => !user.isNewUser);
 
       // Ensure that 'response.pendingFriendRequests' is defined and an array
-      if (Array.isArray(this.friendRequestsIds)) {
+      if (Array.isArray(response.pendingFriendRequests)) {
         // Map user IDs to user objects
-        this.friendRequestsIds.forEach((userId: string) => {
-          const user = this.users.find((u) => u._id === userId);
-          if (user) {
-            this.pendingFriendRequests[userId] = user;
-          }
-        });
+        this.pendingFriendRequests = response.pendingFriendRequests.reduce(
+          (acc: { [x: string]: any; }, userId: string | number) => {
+            const user = this.users.find((u) => u._id === userId);
+            if (user) {
+              acc[userId] = user;
+            }
+            return acc;
+          },
+          {}
+        );
 
         // Count and log the number of pending users
         const pendingUsersCount = Object.keys(
           this.pendingFriendRequests
         ).length;
+        console.log(`Number of pending users: ${pendingUsersCount}`);
       }
     });
-
-    this.filteredUsers = this.users;
   }
 
   async AddFriend(name: string, userFriendId: string) {

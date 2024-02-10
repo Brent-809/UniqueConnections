@@ -139,9 +139,9 @@ export class AuthApiService {
     return this.http.put(`${this.baseUrl}/users/${id}/age/remove`, {});
   }
 
-  updateUserSexuality(id: string, selectedSexuality: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/users/${id}/sexuality`, {
-      sexuality: selectedSexuality,
+  updateUserLocation(id: string, location: string): Observable<any> {
+    return this.http.put(`${this.baseUrl}/users/${id}/location`, {
+      location: location,
     });
   }
 
@@ -227,5 +227,11 @@ export class AuthApiService {
       userName: userName,
     };
     return this.http.post(`${this.baseUrl}/auth/usernameavailable`, body);
+  }
+
+  getGeoLocation(latitude: number, longitude: number): Observable<any> {
+    return this.http.get<string[]>(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=nl`
+    );
   }
 }

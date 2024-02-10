@@ -149,21 +149,6 @@ export class LoginPage implements OnInit {
     await alert.present();
   }
 
-  async presentVerifyMessage() {
-    const alert = await this.alertController.create({
-      header: "Nog niet geverifieerd",
-      message: "Je moet geverifieerd zijn om op deze app in te loggen",
-      buttons: [
-        {
-          text: "OK",
-          handler: () => {},
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-
   goToRegister() {
     this.router.navigateByUrl("/register");
   }

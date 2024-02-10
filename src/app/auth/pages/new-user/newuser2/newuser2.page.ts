@@ -1,7 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthApiService } from "src/app/auth/auth-api.service";
+import { Geolocation } from "@capacitor/geolocation";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-newuser2",
@@ -16,6 +18,7 @@ export class Newuser2Page implements OnInit {
   sexualityDisable: boolean = false;
   isSexualitySubmitted: boolean = false;
   newUserForm!: FormGroup;
+  city!: string;
 
   constructor(
     private apiService: AuthApiService,
@@ -26,61 +29,37 @@ export class Newuser2Page implements OnInit {
   ngOnInit() {
     this.newUserForm = this.formBuilder.group({
       developmentalDisorder: ["", Validators.required],
-   });
+    });
+    this.getGeoLocation();
   }
 
-  savedisorder() {
+  async getGeoLocation() {
+    const coordinates = await Geolocation.getCurrentPosition();
+    this.apiService
+      .getGeoLocation(coordinates.coords.latitude, coordinates.coords.longitude)
+      .subscribe((response) => {
+        this.city = response.city;
+        console.log(this.city);
+      });
+  }
+
+  saveLocation() {
     const userId = this.apiService.getUserIdFromToken();
-    const developmentalDisorder = this.developmentalDisorder;
+    const location = this.city;
     if (userId) {
       this.apiService
-        .updateUserDisorder(userId, this.developmentalDisorder)
+        .updateUserLocation(userId, this.city)
         .subscribe((response: any) => {
-          if (
-            response.id &&
-            response.developmentalDisorder === developmentalDisorder
-          ) {
+          if (response.id && response.location === location) {
             this.disorderDisable = true;
             this.isdisorderSubmitted = true;
-          }
-        });
-    }
-  }
-
-  isFormSubmitted(): boolean {
-    return this.isdisorderSubmitted && this.isSexualitySubmitted;
-  }
-
-  disorderEnable() {
-    this.disorderDisable = false;
-    this.developmentalDisorder = "";
-  }
-
-  SeksualiteitEnable() {
-    this.sexualityDisable = false;
-  }
-
-  SaveSeksualiteitAndDisorder() {
-    const userId = this.apiService.getUserIdFromToken();
-    const developmentalDisorder = this.developmentalDisorder;
-    if (userId) {
-      this.apiService
-        .updateUserDisorder(
-          userId,
-          this.newUserForm.value.developmentalDisorder
-        )
-        .subscribe((response: any) => {
-          if (
-            response.id &&
-            response.developmentalDisorder === developmentalDisorder
-          ) {
           }
         });
       this.router.navigateByUrl("/newuser3");
     }
   }
 
-  GoToNextStep() {
-    this.router.navigateByUrl("/newuser3");
+  isFormSubmitted(): boolean {
+    return this.isdisorderSubmitted && this.isSexualitySubmitted;
   }
 }

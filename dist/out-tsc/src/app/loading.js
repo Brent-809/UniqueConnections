@@ -1,29 +1,22 @@
-import { __awaiter, __decorate } from "tslib";
+import { __decorate } from "tslib";
 import { Injectable } from "@angular/core";
-export let loading = class loading {
+let loading = class loading {
     constructor(loadingController) {
         this.loadingController = loadingController;
     }
-    presentLoading() {
-        return __awaiter(this, void 0, void 0, function* () {
-            this.loading = true;
-            return yield this.loadingController.create({}).then((a) => {
-                a.present().then(() => {
-                    console.log("presented");
-                    if (!this.loading) {
-                        a.dismiss().then(() => console.log("abort presenting"));
-                    }
-                });
+    async presentLoading() {
+        this.loading = true;
+        return await this.loadingController.create({}).then((a) => {
+            a.present().then(() => {
+                if (!this.loading) {
+                    a.dismiss();
+                }
             });
         });
     }
-    hideLoading() {
-        return __awaiter(this, void 0, void 0, function* () {
-            this.loading = false;
-            return yield this.loadingController
-                .dismiss()
-                .then(() => console.log("dismissed"));
-        });
+    async hideLoading() {
+        this.loading = false;
+        return await this.loadingController.dismiss();
     }
 };
 loading = __decorate([
@@ -31,4 +24,5 @@ loading = __decorate([
         providedIn: "root",
     })
 ], loading);
+export { loading };
 //# sourceMappingURL=loading.js.map

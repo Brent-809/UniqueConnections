@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit } from "@angular/core";
 import { confirmAnimationPath } from "./confirmation.animation";
 import lottie from "lottie-web";
+import { RegistrationService } from "src/app/auth/registration.service";
 
 @Component({
   selector: "app-register4",
@@ -11,9 +12,13 @@ export class Register4Page implements OnInit {
   private animationDuration: number = 4000;
   private animation: any;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(
+    private elementRef: ElementRef,
+    private registerService: RegistrationService
+  ) {}
 
   ngOnInit() {
+    this.registerService.removeFromLocalstorage();
     const animationContainer =
       this.elementRef.nativeElement.querySelector("#lottie-container");
     this.animation = lottie.loadAnimation({

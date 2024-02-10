@@ -23,24 +23,25 @@ export class ApiInterceptorService implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     // Add your API key to the headers
     const apiKey = environment.apiKey;
-    const isMainApiRequest = request.url.startsWith(environment.apiUrl);
-    if (isMainApiRequest) {
+
+    if (request.url.startsWith(environment.apiUrl)) {
       this.modifiedRequest = request.clone({
         setHeaders: {
           apiKey: apiKey,
         },
       });
+    } else if (request.url.startsWith(environment.onesignalApi)) {
+      this.modifiedRequest = request.clone({
+        setHeaders: {
+          Authorization: `Basic ${environment.onesignalKey}`,
+        },
+      });
     } else {
-      if (request.url.startsWith(environment.onesignalApi)) {
-        this.modifiedRequest = request.clone({
-          setHeaders: {
-            Authorization: `Basic ${environment.onesignalKey}`,
-          },
-        });
-      }
+      // Handle other cases if needed
+      this.modifiedRequest = request.clone();
     }
+
     return next.handle(this.modifiedRequest);
     // Pass the modified request to the next interceptor or the HTTP handler
   }
-
 }

@@ -59,7 +59,6 @@ export class MessagesPage implements OnInit {
       );
 
       this.users = response
-        .filter((user: User) => user.verified)
         .filter((user: User) => user._id !== this.currentUserId)
         .filter((user: User) => !user.isNewUser)
         .filter((user: User) => allUserFriendIds.includes(user._id));
