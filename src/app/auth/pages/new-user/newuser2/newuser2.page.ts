@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthApiService } from "src/app/auth/auth-api.service";
 import { Geolocation } from "@capacitor/geolocation";
-import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-newuser2",

@@ -7,10 +7,9 @@
       <h2
         class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
       >
-        Stoornissen
+        Locatie
       </h2>
     </div>
-
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <form
         class="space-y-6"
@@ -20,7 +19,7 @@
         <ion-card>
           <ion-card-header>
             <ion-item>
-              <capacitor-google-map #map></capacitor-google-map>
+              <ion-title>{{city}}</ion-title>
             </ion-item>
           </ion-card-header>
         </ion-card>
@@ -97,7 +96,6 @@
         <div>
           <button
             type="submit"
-            [disabled]="!newUserForm.valid"
             class="flex w-full justify-center rounded-md bg-gradient-to-r from-green-400 to-cyan-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
           >
             Ga verder

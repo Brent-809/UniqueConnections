@@ -10,6 +10,8 @@ export class EventCardComponent implements OnInit {
   @Input()
   name!: string;
   @Input()
+  description!: string;
+  @Input()
   image!: string;
   @Input()
   date!: string;

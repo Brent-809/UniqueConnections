@@ -1,12 +1,17 @@
-<ion-item lines="none" class="">
-  <ion-thumbnail slot="start">
-      <img [src]="image">
-  </ion-thumbnail>
-  <ion-label>
-    <p class="caption">{{ from }}-{{ to }}  {{ date }}</p>
-    <p class="title">{{ name }}</p>
-    <p class="caption">{{ location }}</p>
-    <ul class="avatars">
+<ion-item lines="none">
+  <div
+    style="transform: translateX(-50%)"
+    class="z-50 rounded-full py-1 m-auto absolute top-0 left-1/2 w-8/12 justify-center text-center bg-[#57cc99]"
+  >
+    <p class="text-white">{{ date }} • {{ from }} - {{ to }}</p>
+  </div>
+
+  <ion-thumbnail class="w-full h-[195px] relative">
+    <img [src]="image" class="rounded-xl w-full h-[195px]" />
+    <ul
+      class="avatars absolute"
+      style="left: 50%; bottom: 20px; transform: translateX(-50%); margin: auto"
+    >
       <li class="avatar-item" *ngFor="let item of avatars">
         <img [src]="item" class="avatar-img" />
       </li>
@@ -16,5 +21,27 @@
         </div>
       </li>
     </ul>
+  </ion-thumbnail>
+
+  <ion-label>
+    <div class="flex w-full justify-center">
+      <p class="title pr-2 text-left w-full">{{ name }}</p>
+      <a>
+        <ion-icon
+          slot="end"
+          name="notifications-outline"
+          class="text-2xl"
+          color="dark"
+        ></ion-icon
+      ></a>
+    </div>
+    <p class="location">{{ location }}</p>
+    <p class="caption">{{ description }}</p>
   </ion-label>
+  <button
+    class="flex w-full justify-center rounded-md bg-gradient-to-r bg-black px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+  >
+    Deelnemen
+  </button>
 </ion-item>
+<div class="border-[0.75px] border-[#545454] my-3"></div>
