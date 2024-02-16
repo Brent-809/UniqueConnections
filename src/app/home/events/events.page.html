@@ -36,13 +36,12 @@
             *ngFor="let item of events"
             [description]="item.description"
             [image]="item.image"
-            [name]="item.name"
+            [name]="item.title"
             [from]="item.from"
             [to]="item.to"
             [date]="item.date"
             [location]="item.location"
-            [avatars]="item.attend.avatars"
-            [total]="item.attend.total"
+            [allowJoin]="item.allowJoin"
           ></app-event-card>
         </ion-list>
       </ion-col>

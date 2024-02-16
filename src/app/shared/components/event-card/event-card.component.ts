@@ -1,12 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-event-card',
-  templateUrl: './event-card.component.html',
-  styleUrls: ['./event-card.component.scss'],
+  selector: "app-event-card",
+  templateUrl: "./event-card.component.html",
+  styleUrls: ["./event-card.component.scss"],
 })
 export class EventCardComponent implements OnInit {
-
   @Input()
   name!: string;
   @Input()
@@ -14,7 +13,7 @@ export class EventCardComponent implements OnInit {
   @Input()
   image!: string;
   @Input()
-  date!: string;
+  date!: Date[];
   @Input()
   from!: string;
   @Input()
@@ -25,9 +24,10 @@ export class EventCardComponent implements OnInit {
   avatars!: string[];
   @Input()
   total!: number;
+  @Input()
+  allowJoin!: boolean;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
-
 }
