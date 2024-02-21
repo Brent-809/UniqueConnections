@@ -41,8 +41,8 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.makeRequest();
     setTimeout(() => {
-      this.makeRequest();
       this.showSplash = false;
     }, 3000);
   }
@@ -58,11 +58,11 @@ export class AppComponent implements OnInit {
   makeRequest() {
     const apiUrl = environment.apiUrl;
     this.http.get(apiUrl).subscribe(
-      () => {}
-      // (error) => {
-      //   console.error(error);
-      //   this.router.navigateByUrl("/error");
-      // }
+      () => {},
+      (error) => {
+        console.error(error);
+        this.router.navigateByUrl("/error");
+      }
     );
   }
 }

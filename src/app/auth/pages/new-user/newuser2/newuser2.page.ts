@@ -21,14 +21,10 @@ export class Newuser2Page implements OnInit {
 
   constructor(
     private apiService: AuthApiService,
-    private router: Router,
-    private formBuilder: FormBuilder
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.newUserForm = this.formBuilder.group({
-      developmentalDisorder: ["", Validators.required],
-    });
     this.getGeoLocation();
   }
 
@@ -38,7 +34,6 @@ export class Newuser2Page implements OnInit {
       .getGeoLocation(coordinates.coords.latitude, coordinates.coords.longitude)
       .subscribe((response) => {
         this.city = response.city;
-        console.log(this.city);
       });
   }
 
@@ -46,15 +41,15 @@ export class Newuser2Page implements OnInit {
     const userId = this.apiService.getUserIdFromToken();
     const location = this.city;
     if (userId) {
-      this.apiService
-        .updateUserLocation(userId, this.city)
-        .subscribe((response: any) => {
-          if (response.id && response.location === location) {
-            this.disorderDisable = true;
-            this.isdisorderSubmitted = true;
-          }
-        });
+      this.apiService.updateUserLocation(userId, this.city).subscribe(
+        (response: any) => {},
+        (error: any) => {
+          throw new Error(error);
+        }
+      );
       this.router.navigateByUrl("/newuser3");
+    } else {
+      throw new Error("User ID not found in token");
     }
   }
 

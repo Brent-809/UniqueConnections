@@ -15,7 +15,7 @@
         <swiper-container slides-per-view="2.5" loop="true">
           <swiper-slide
             class="ion-activatable ripple-parent border w-full border-[#e6e6e6] rounded-lg p-2 text-center justify-center mr-2"
-            *ngFor="let category of categories"
+            *ngFor="let category of categories | slice:0:6"
           >
             <ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
             <div>
@@ -23,10 +23,27 @@
                 class="text-sm"
                 [icon]="category.icon"
               ></iconify-icon
-              ><ion-text> {{category.name}} </ion-text>
+              ><ion-text> {{category.title}} </ion-text>
             </div>
           </swiper-slide>
         </swiper-container>
+        <br />
+        @if (creator === true) {
+        <div
+          class="ion-activatable relative ripple-parent border w-full border-[#e6e6e6] rounded-lg p-2 text-center justify-center mr-2"
+          id="open-modal"
+          style="flex: 0 0 auto"
+        >
+          <ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
+          <div>
+            <iconify-icon
+              class="text-sm"
+              [icon]="'flat-color-icons:plus'"
+            ></iconify-icon
+            ><ion-text> Creëer </ion-text>
+          </div>
+        </div>
+        }
       </ion-col>
     </ion-row>
     <ion-row>
@@ -52,4 +69,99 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <ion-modal
+    #modal
+    trigger="open-modal"
+    [presentingElement]="presentingElement"
+  >
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Creëer categorie</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="modal.dismiss()">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form
+            class="space-y-6"
+            [formGroup]="createCategoryForm"
+            (ngSubmit)="createCategory()"
+          >
+            <div>
+              <label
+                for="title"
+                class="block text-sm font-medium leading-6 text-gray-900"
+                >Titel</label
+              >
+              <div class="mt-2">
+                <input
+                  id="title"
+                  name="title"
+                  type="title"
+                  autocomplete="title"
+                  required
+                  formControlName="title"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6"
+                />
+              </div>
+              <div
+                class="text-red-500"
+                *ngIf="createCategoryForm.get('title')?.invalid && createCategoryForm.get('title')?.touched"
+              >
+                Titel is vereist.
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between">
+                <label
+                  for="icon"
+                  class="block text-sm font-medium leading-6 text-gray-900"
+                  >Icoon</label
+                >
+              </div>
+              <div class="mt-2">
+                <input
+                  id="icon"
+                  name="icon"
+                  type="text"
+                  autocomplete="icon"
+                  placeholder="Het icoon dat erbij hoort."
+                  required
+                  formControlName="icon"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6"
+                />
+              </div>
+
+              <div
+                class="text-red-500"
+                *ngIf="createCategoryForm.get('icon')?.invalid && createCategoryForm.get('icon')?.touched"
+              >
+                Icoon is vereist.
+              </div>
+              <a
+                href="https://icon-sets.iconify.design/"
+                class="flex mt-4 w-full justify-center rounded-md bg-gradient-to-r from-green-400 to-cyan-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+              >
+                Ga naar icoon pagina
+              </a>
+            </div>
+            <hr />
+            <div>
+              <button
+                type="submit"
+                [disabled]="!createCategoryForm.valid"
+                class="flex disabled:opacity-55 w-full justify-center rounded-md bg-gradient-to-r from-green-400 to-cyan-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+              >
+                Creëer
+              </button>
+            </div>
+          </form>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

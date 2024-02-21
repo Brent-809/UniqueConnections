@@ -3,6 +3,8 @@ import { HomeApiService } from "../home-api.service";
 import "iconify-icon";
 import { EventsApiService } from "../events-api.service";
 import { Events } from "src/app/shared/interfaces/events.interface";
+import { ModalController } from "@ionic/angular";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-events",
@@ -12,31 +14,37 @@ import { Events } from "src/app/shared/interfaces/events.interface";
 export class EventsPage implements OnInit {
   userId!: string | undefined;
   admin!: boolean;
+  creator!: boolean;
+  presentingElement: any;
   events: Events[] = [];
-
-  categories: any[] = [
-    { name: "Concerten", icon: "fluent-emoji-flat:guitar" },
-    { name: "YouTube", icon: "logos:youtube-icon" },
-    { name: "Lgtbq+", icon: "twemoji:rainbow-flag" },
-    { name: "Films", icon: "ic:round-movie" },
-  ];
+  createCategoryForm!: FormGroup;
+  categories: any[] = [];
 
   constructor(
     private apiService: HomeApiService,
-    private eventsService: EventsApiService
+    private eventsService: EventsApiService,
+    private modalController: ModalController
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.getUserId();
-    this.checkIsAdmin();
+    this.checkValues();
+    await this.getAllEventCategories();
     this.getAllEvents();
+    this.presentingElement = document.querySelector(".ion-page");
+    this.createCategoryForm = new FormGroup({
+      title: new FormControl("", [
+        Validators.required,
+        Validators.maxLength(7),
+      ]),
+      icon: new FormControl("", Validators.required),
+    });
   }
 
-  checkIsAdmin() {
+  checkValues() {
     this.apiService.getUserById(this.userId).subscribe((response: any) => {
-      if (response.isAdmin === true) {
-        this.admin = true;
-      }
+      this.admin = response.isAdmin === true;
+      this.creator = response.isCreator;
     });
   }
 
@@ -46,7 +54,25 @@ export class EventsPage implements OnInit {
     });
   }
 
+  async getAllEventCategories() {
+    this.eventsService.getCategories().subscribe((response) => {
+      this.categories = response.map((category: any) => ({
+        icon: category.icon,
+        title: category.title,
+      }));
+    });
+  }
+
   getUserId() {
     this.userId = this.apiService.getUserIdFromToken();
+  }
+
+  createCategory() {
+    this.eventsService
+      .createCategory(this.createCategoryForm.value)
+      .subscribe(() => {
+        this.ngOnInit();
+        this.modalController.dismiss();
+      });
   }
 }
