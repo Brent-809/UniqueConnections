@@ -47,14 +47,14 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
-  {
-    path: "newuser2",
-    loadChildren: () =>
-      import("./auth/pages/new-user/newuser2/newuser2.module").then(
-        (m) => m.Newuser2PageModule
-      ),
-    canActivate: [AuthGuard],
-  },
+  // {
+  //   path: "newuser2",
+  //   loadChildren: () =>
+  //     import("./auth/pages/new-user/newuser2/newuser2.module").then(
+  //       (m) => m.Newuser2PageModule
+  //     ),
+  //   canActivate: [AuthGuard],
+  // },
   {
     path: "newuser3",
     loadChildren: () =>

@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">UniqueConnections</string>
     <string name="title_activity_main">UniqueConnections</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">com.brent809.uniqueconnections</string>
+    <string name="custom_url_scheme">com.brent809.uniqueconnections</string>
 </resources>

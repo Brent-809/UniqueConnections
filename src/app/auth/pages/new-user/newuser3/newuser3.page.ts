@@ -1,7 +1,8 @@
-// newuser3.page.ts
-import { Component, OnInit } from "@angular/core";
+import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthApiService } from "src/app/auth/auth-api.service";
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: "app-newuser3",
@@ -16,11 +17,26 @@ export class Newuser3Page implements OnInit {
     { label: "Age", visible: true },
     { label: "Gender", visible: true },
   ];
+  imgForm!: FormGroup;
 
-  constructor(private apiService: AuthApiService, private router: Router) {}
+  constructor(
+    private apiService: AuthApiService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.fetchProfileImages();
+    this.imgForm = this.fb.group({
+      customImg: [""],
+    });
+  }
+
+  onChange() {
+    const value = this.imgForm.get("customImg")?.value;
+    if (value) {
+      this.fetchProfileImgByName(value);
+    }
   }
 
   fetchProfileImages() {
@@ -28,12 +44,25 @@ export class Newuser3Page implements OnInit {
       (response) => {
         this.profileImages = response;
         if (this.profileImages) {
+          console.log(this.profileImages);
           this.selectedProfileImage = this.profileImages[0];
         }
       },
-      (error) => {
-      }
+      (error) => {}
     );
+  }
+
+  fetchProfileImgByName(name: string) {
+    this.apiService.getProfileImgByName(name).pipe(
+      map((response) => {
+        console.log(response);
+        this.profileImages = response;
+        if (this.profileImages) {
+          console.log(this.profileImages);
+          this.selectedProfileImage = this.profileImages[0];
+        }
+      })
+    ).subscribe();
   }
 
   selectProfileImage(image: string) {
@@ -44,54 +73,28 @@ export class Newuser3Page implements OnInit {
     const id = this.apiService.getUserIdFromToken();
     if (id) {
       switch (privacyVariable.label) {
-        case "Wettelijke Naam":
+        case "Name":
           this.apiService
             .updateNamePrivacyStatusById(id, privacyVariable.visible)
             .subscribe(
-              () => {
-              },
-              (error) => {
-              }
+              () => {},
+              (error) => {}
             );
           break;
         case "Leeftijd":
           this.apiService
             .updateAgePrivacyStatusById(id, privacyVariable.visible)
             .subscribe(
-              () => {
-              },
-              (error) => {
-              }
+              () => {},
+              (error) => {}
             );
           break;
         case "Geslacht":
           this.apiService
             .updateGenderPrivacyStatusById(id, privacyVariable.visible)
             .subscribe(
-              () => {
-              },
-              (error) => {
-              }
-            );
-          break;
-        case "Seksualiteit":
-          this.apiService
-            .updateSexualityPrivacyStatusById(id, privacyVariable.visible)
-            .subscribe(
-              () => {
-              },
-              (error) => {
-              }
-            );
-          break;
-        case "Ontwikkelingsstoornis":
-          this.apiService
-            .updateDisorderPrivacyStatusById(id, privacyVariable.visible)
-            .subscribe(
-              () => {
-              },
-              (error) => {
-              }
+              () => {},
+              (error) => {}
             );
           break;
         default:
@@ -112,12 +115,10 @@ export class Newuser3Page implements OnInit {
               () => {
                 this.router.navigateByUrl("/");
               },
-              (error) => {
-              }
+              (error) => {}
             );
           },
-          (error) => {
-          }
+          (error) => {}
         );
     }
   }

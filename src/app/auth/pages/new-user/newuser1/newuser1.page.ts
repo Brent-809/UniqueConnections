@@ -61,12 +61,8 @@ export class Newuser1Page implements OnInit {
             this.isAgeSubmitted = true;
           }
         });
-      this.router.navigateByUrl("/newuser2");
+      this.router.navigateByUrl("/newuser3");
     }
-  }
-
-  GoToNextStep() {
-    this.router.navigateByUrl("/newuser2");
   }
 
   isFormSubmitted(): boolean {

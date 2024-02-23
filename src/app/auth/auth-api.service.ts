@@ -218,6 +218,10 @@ export class AuthApiService {
     return this.http.get<string[]>(`${this.baseUrl}/users/profile/images`);
   }
 
+  getProfileImgByName(name: string): Observable<string> { 
+    return this.http.get<string>(`https://api.multiavatar.com/${name}.png?apikey=L4XfGy0RQBi6Ae`);
+  }
+
   selectProfileImage(id: string, profileImage: string): Observable<any> {
     return this.http.put(`${this.baseUrl}/users/${id}/image`, { profileImage });
   }

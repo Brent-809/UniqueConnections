@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.brent809.uniqueconnections;
 
 import com.getcapacitor.BridgeActivity;
 

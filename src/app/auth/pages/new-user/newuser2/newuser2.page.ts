@@ -10,13 +10,8 @@ import { Geolocation } from "@capacitor/geolocation";
   styleUrls: ["./newuser2.page.scss"],
 })
 export class Newuser2Page implements OnInit {
-  disorderDisable: boolean = false;
-  developmentalDisorder: string = ""; // ngModel bound property
-  isdisorderSubmitted: boolean = false;
-  selectedSexuality!: string;
-  sexualityDisable: boolean = false;
-  isSexualitySubmitted: boolean = false;
   newUserForm!: FormGroup;
+  locationChange: boolean = false;
   city!: string;
 
   constructor(
@@ -51,9 +46,5 @@ export class Newuser2Page implements OnInit {
     } else {
       throw new Error("User ID not found in token");
     }
-  }
-
-  isFormSubmitted(): boolean {
-    return this.isdisorderSubmitted && this.isSexualitySubmitted;
   }
 }
