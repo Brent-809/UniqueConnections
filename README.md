@@ -1,14 +1,11 @@
-
-# Unique Connections ![Logo](http://uniqueconnections.be/images/logo.png)
-
 <p align="center">
   <a href="#">
-    <img alt="Ionic" src="https://github.com/ionic-team/ionic-framework/blob/main/.github/assets/logo.png?raw=true" width="60" />
+    <img alt="Ionic" src="http://uniqueconnections.be/images/logo.png" width="60" />
   </a>
 </p>
 
 <h1 align="center">
-  Ionic
+  Unique Connections
 </h1>
 
 <p align="center">
