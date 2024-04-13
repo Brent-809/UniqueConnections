@@ -1,6 +1,6 @@
 <p align="center">
   <a href="#">
-    <img alt="Ionic" src="http://uniqueconnections.be/images/logo.png" />
+    <img alt="Ionic" src="http://uniqueconnections.be/images/logo.png" width="320" />
   </a>
 </p>
 
